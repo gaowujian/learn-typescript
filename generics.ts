@@ -42,3 +42,5 @@ function swap<T, U>(tuple: [T, U]): [U, T] {
 const result1 = swap(["string", 123]);
 result1[0]; //有number的方法
 result1[1]; //有string的方法
+
+export {};

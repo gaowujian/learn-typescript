@@ -30,3 +30,5 @@ const result1 = echoWithLength([1, 23]);
 const result2 = echoWithLength("string");
 // 错误实例
 // const result3 = echoWithLength(true);
+
+export {};
