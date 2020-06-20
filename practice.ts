@@ -21,7 +21,7 @@ const anyValue4: any = null;
 const uniValue1: string | number = "string";
 const uniValue2: string | number = 123;
 
-// array数组 类型一样的元素集合
+// array数组 类型一样的元素集合 （联合类型也是一种类型）
 const array1: number[] = [123, 232];
 const array2: string[] = ["aaa", "bbb"];
 const array3: (string | number)[] = ["aaa", 112];
@@ -186,5 +186,158 @@ type EventNames = "click" | "scroll" | "mousemove";
 function handleEvent(ele: Element, event: EventNames) {
   // do something
 }
+
+// 元组
+// 数组合并了相同类型的对象，而元组（Tuple）合并了不同类型的对象。
+const tuple2: [number, string] = [123, "string"];
+
+// 枚举
+// 枚举（Enum）类型用于取值被限定在一定范围内的场景，比如一周只能有七天，颜色限定为红绿蓝等。
+
+enum Days3 {
+  Sun,
+  Mon,
+  Tue,
+  Wed,
+  Thu,
+  Fri,
+  Sat,
+}
+
+// 类和接口
+// 接口除了描述对象形状的作用，另外一个作用就是对类的一部分行为进行抽象
+// 三种主要情况
+// 1. 类实现接口
+// 2. 接口继承接口
+// 3. 接口继承类
+
+// 1. 类实现接口
+interface Alarm {
+  alert(): void;
+}
+
+class Door {}
+
+class SecurityDoor extends Door implements Alarm {
+  alert() {
+    console.log("SecurityDoor alert");
+  }
+}
+
+class Car implements Alarm {
+  alert() {
+    console.log("Car alert");
+  }
+}
+
+// 2. 接口继承接口
+
+interface Alarm {
+  alert(): void;
+}
+
+interface LightableAlarm extends Alarm {
+  lightOn(): void;
+  lightOff(): void;
+}
+
+// 3. 接口继承类
+// 我们可以看出 Point 和 PointInstanceType是等价的
+// 接口继承类和接口继承接口没有什么本质的区别，只是继承了实例上的属性和方法，不包含静态属性和方法
+class Point {
+  x: number;
+  y: number;
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+  public fn1() {
+    return this.x + this.y;
+  }
+}
+
+function printPoint(p: Point) {
+  console.log(p.x, p.y);
+}
+
+interface PointInstanceType {
+  x: number;
+  y: number;
+}
+
+function printPoint2(p: PointInstanceType) {
+  console.log(p.x, p.y);
+}
+
+printPoint(new Point(1, 2));
+printPoint2(new Point(1, 2));
+
+// 泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。
+
+// 1. 函数 （含有泛型的函数）
+// 2. 接口 (含有泛型的接口)
+// 3. 类 (含有泛型的类)
+
+// 函数，单个泛型
+function createArray<T>(length: number, value: T): Array<T> {
+  let result: T[] = [];
+  for (let i = 0; i < length; i++) {
+    result[i] = value;
+  }
+  return result;
+}
+
+createArray<string>(3, "x"); // ['x', 'x', 'x']
+
+// 函数，多个泛型
+function swap<T, U>(tuple: [T, U]): [U, T] {
+  return [tuple[1], tuple[0]];
+}
+
+swap([7, "seven"]); // ['seven', 7]
+
+// 泛型只是提供给开发者一个动态类型的坑，类型应该是什么样子是要靠interface的定义来确定的
+// 定义interface的时候有什么样的约束，泛指就有哪些约束，用extends关键子
+
+interface Lengthwise {
+  length: number;
+}
+
+function loggingIdentity<T extends Lengthwise>(arg: T): T {
+  console.log(arg.length);
+  return arg;
+}
+
+loggingIdentity("string");
+
+// 泛型接口
+// 给接口添加泛型的时候，可以添加在括号外，也可以添加在括号内
+
+interface CreateArrayFunc<T> {
+  (length: number, value: T): Array<T>;
+}
+
+let createArray2: CreateArrayFunc<any>;
+createArray2 = function <T>(length: number, value: T): Array<T> {
+  let result: T[] = [];
+  for (let i = 0; i < length; i++) {
+    result[i] = value;
+  }
+  return result;
+};
+
+createArray(3, "x"); // ['x', 'x', 'x']
+
+// 泛型类
+class GenericNumber<T> {
+  zeroValue: T;
+  add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function (x, y) {
+  return x + y;
+};
 
 export {};
