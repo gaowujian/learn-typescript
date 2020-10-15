@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     // "strictNullChecks": true,
-    "lib": ["es2015", "DOM"]
+    "lib": ["es2015", "DOM"],
+    "jsx": "react"
   },
   "include": ["**/*"]
 }
