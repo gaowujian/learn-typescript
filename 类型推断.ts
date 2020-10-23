@@ -32,12 +32,14 @@ let zoo = [new Rhino(), new Elephant(), new Snake()];
 
 // typescript的类型检查器使用左侧的window.onmousedown来推断右侧函数表达式的类型
 
-window.onmousedown = function (mouseEvent: MouseEvent) {
-  console.log(mouseEvent.button); //<- Error
-};
+// window.onmousedown = function (mouseEvent: MouseEvent) {
+//   console.log(mouseEvent.button); //<- Error
+// };
 
-const btn = document.getElementById("root");
-btn.addEventListener("input", function (e: Event) {
-  const element = e.target as HTMLTextAreaElement;
-  console.log(element.setAttribute("value", "20"));
-});
+// const btn = document.getElementById("root");
+// btn.addEventListener("input", function (e: Event) {
+//   const element = e.target as HTMLTextAreaElement;
+//   console.log(element.setAttribute("value", "20"));
+// });
+
+export {};
