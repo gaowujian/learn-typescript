@@ -9,15 +9,14 @@ class Animal {
 }
 class Pig extends Animal {
   name: string = "自己的名字";
-  constructor() {
-    super("222");
+  constructor(name) {
+    super("34");
+    this.name = name;
   }
   getName() {
     return this.name;
   }
 }
-const p = new Pig();
-
-console.log("p.getName()", p.getName());
+const p = new Pig("猪");
 
 export {};

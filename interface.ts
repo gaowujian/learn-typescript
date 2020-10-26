@@ -35,3 +35,27 @@ class Person implements Speakable, Eatable {
 
 const p1 = new Person();
 p1.eat();
+
+// 3.类接口
+// 除了普通的用法，针对于类，接口还有一些特殊用法
+// 可以使用new来约束构造函数
+namespace c {
+  interface Speakable {
+    speak(): void;
+  }
+  class Pig implements Speakable {
+    name: string;
+    constructor(name: string) {
+      this.name = name;
+    }
+    speak() {}
+  }
+
+  interface withString {
+    new (name: string): void;
+  }
+  function createAnimal(animalType: withString, name: string) {
+    return new animalType(name);
+  }
+  const a = createAnimal(Pig, "猪");
+}
