@@ -1,22 +1,8 @@
-class Animal {
-  name: string = "父亲的名字";
-  constructor(name: string) {
-    this.name = name;
-  }
-  getName(): string {
-    return this.name;
-  }
+interface add<T> {
+  (x: T): T;
 }
-class Pig extends Animal {
-  name: string = "自己的名字";
-  constructor(name) {
-    super("34");
-    this.name = name;
-  }
-  getName() {
-    return this.name;
-  }
+interface IPoint<U = number, T = string> {
+  x: U;
+  y: T;
 }
-const p = new Pig("猪");
-
 export {};
