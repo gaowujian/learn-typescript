@@ -1,21 +1,9 @@
-abstract class Point {
-  x: number;
-  y: number;
-  constructor(public name: string = "tony") {}
-  abstract getName(): string;
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
 }
 
-interface Point3d extends Point {
-  z: number;
-}
+let x = { a: 1, b: 2, c: 3, d: 4 };
 
-let point3d: Point3d = {
-  x: 1,
-  y: 2,
-  z: 3,
-  name: "",
-  getName: function () {
-    return this.name;
-  },
-};
+getProperty(x, "a");
+getProperty(x, "c");
 export {};
