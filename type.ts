@@ -14,10 +14,25 @@ namespace type {
     age: number;
   }
   interface IAction {
-    eat(): void;
+    (x: number, y: string): string;
   }
   type ren = IPerson;
+  type ren2 = {
+    name: string;
+    age: number;
+  };
   type xingwei = IAction;
+
+  type xingwei2 = (x: string) => number;
+
+  function getName(aa): IAction {
+    return;
+  }
+  getName("jdd");
+  var gg: IAction;
+  gg = function () {
+    return "11";
+  };
   //   接口泛型
   interface IProps<T> {
     data: T;
